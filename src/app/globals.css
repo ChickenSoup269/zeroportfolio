@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "GohuFont";
+  src: url("/fonts/gohu.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -117,7 +124,12 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans; /* Default font */
+  }
+
+  /* Apply Gohu Font when html has 'font-gohu' class */
+  html.font-gohu body {
+    font-family: "GohuFont", sans-serif !important;
   }
 }
 

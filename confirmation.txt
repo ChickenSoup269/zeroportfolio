@@ -1,1 +1,0 @@
-Đã thêm phần dịch thuật cho trang `src/app/other-projects/page.tsx` ở lượt trước. Yêu cầu của bạn đã hoàn thành.

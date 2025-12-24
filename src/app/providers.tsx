@@ -2,6 +2,7 @@
 "use client"
 import { ThemeProvider } from "next-themes"
 import { LanguageProvider } from "./LanguageContext"
+import { FontProvider } from "./FontContext"
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -11,7 +12,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      <LanguageProvider>{children}</LanguageProvider>
+      <FontProvider>
+        <LanguageProvider>{children}</LanguageProvider>
+      </FontProvider>
     </ThemeProvider>
   )
 }
