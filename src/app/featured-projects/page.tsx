@@ -66,7 +66,7 @@ export default function FeaturedProjects() {
           animate="visible"
         >
           {projectsData.map((project) => (
-            <motion.div key={project.slug} variants={cardVariants}>
+            <motion.div key={project.slug}>
               <Card className="group relative h-80 w-full overflow-hidden rounded-xl border-2 border-transparent hover:border-primary/50 shadow-lg transition-all duration-300">
                 {/* Lớp ảnh nền */}
                 <Image
@@ -89,61 +89,36 @@ export default function FeaturedProjects() {
                   </p>
                 </div>
 
-                                {/* Nút và thông tin hiện ra khi hover */}
+                {/* Nút và thông tin hiện ra khi hover */}
 
-                                                                                                <div className="absolute inset-0 z-10 flex flex-col justify-center items-center p-6 bg-black/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+                <div className="absolute inset-0 z-10 flex flex-col justify-center items-center p-6 bg-black/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+                  <div className="text-center">
+                    <motion.h3
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.1, duration: 0.3 }}
+                      className="text-2xl font-bold text-white mb-6"
+                    >
+                      {t(project.title)}
+                    </motion.h3>
 
-                                                                                                  <div className="text-center">
-
-                                                                                                    <motion.h3
-
-                                                                                                      initial={{ y: 20, opacity: 0 }}
-
-                                                                                                      animate={{ y: 0, opacity: 1 }}
-
-                                                                                                      transition={{ delay: 0.1, duration: 0.3 }}
-
-                                                                                                      className="text-2xl font-bold text-white mb-6"
-
-                                                                                                    >
-
-                                                                                                      {t(project.title)}
-
-                                                                                                    </motion.h3>
-
-                                                                                                    <motion.div
-
-                                                                                                      initial={{ y: 20, opacity: 0 }}
-
-                                                                                                      animate={{ y: 0, opacity: 1 }}
-
-                                                                                                      transition={{ delay: 0.25, duration: 0.3 }}
-
-                                                                                                    >
-
-                                                                                                      <Button
-
-                                                                                                        variant="outline"
-
-                                                                                                        className="w-40 text-lg px-6 py-3 border-2 border-white text-white bg-white/10 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
-
-                                                                                                        asChild
-
-                                                                                                      >
-
-                                                                                                        <Link href={`/projects/${project.slug}`}>
-
-                                                                                                          {t("details")}
-
-                                                                                                        </Link>
-
-                                                                                                      </Button>
-
-                                                                                                    </motion.div>
-
-                                                                                                  </div>
-
-                                                                                                </div>
+                    <motion.div
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.25, duration: 0.3 }}
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-40 text-lg px-6 py-3 border-2 border-white text-white bg-white/10 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                        asChild
+                      >
+                        <Link href={`/projects/${project.slug}`}>
+                          {t("details")}
+                        </Link>
+                      </Button>
+                    </motion.div>
+                  </div>
+                </div>
               </Card>
             </motion.div>
           ))}

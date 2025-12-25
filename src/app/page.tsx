@@ -162,7 +162,7 @@ export default function Home() {
                 className="rounded-full"
                 asChild
               >
-                <Link href="#" target="_blank" onClick={handleScrollToFooter}>
+                <Link href="#" onClick={handleScrollToFooter}>
                   <Github className="h-5 w-5" />
                 </Link>
               </Button>

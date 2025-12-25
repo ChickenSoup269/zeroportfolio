@@ -350,7 +350,9 @@ export default function ProjectClientUI({ project }: { project: any }) {
                   </span>
                   <Badge
                     variant={
-                      meta.status === t("statusCompleted") ? "default" : "secondary"
+                      meta.status === t("statusCompleted")
+                        ? "default"
+                        : "secondary"
                     }
                   >
                     {meta.status}
