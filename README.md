@@ -37,7 +37,3 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [Framer Motion](https.framer.com/motion) - A production-ready motion library for React.
 - [React Icons](https://react-icons.github.io/react-icons/) - SVG react icons of popular icon packs.
 - [Next-Themes](https://github.com/pacocoursey/next-themes) - An abstraction for themes in your Next.js app.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
