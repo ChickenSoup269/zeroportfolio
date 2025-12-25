@@ -91,47 +91,59 @@ export default function FeaturedProjects() {
 
                                 {/* Nút và thông tin hiện ra khi hover */}
 
-                                                                <div className="absolute inset-0 z-10 flex flex-col justify-center items-center p-6 bg-black/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+                                                                                                <div className="absolute inset-0 z-10 flex flex-col justify-center items-center p-6 bg-black/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
 
-                                                                  <div className="text-center">
+                                                                                                  <div className="text-center">
 
-                                                                    <motion.h3
+                                                                                                    <motion.h3
 
-                                                                      initial={{ y: 20, opacity: 0 }}
+                                                                                                      initial={{ y: 20, opacity: 0 }}
 
-                                                                      animate={{ y: 0, opacity: 1 }}
+                                                                                                      animate={{ y: 0, opacity: 1 }}
 
-                                                                      transition={{ delay: 0.1, duration: 0.3 }}
+                                                                                                      transition={{ delay: 0.1, duration: 0.3 }}
 
-                                                                      className="text-2xl font-bold text-white mb-6"
+                                                                                                      className="text-2xl font-bold text-white mb-6"
 
-                                                                    >
+                                                                                                    >
 
-                                                                      {t(project.title)}
+                                                                                                      {t(project.title)}
 
-                                                                    </motion.h3>
+                                                                                                    </motion.h3>
 
-                                                                    <Button
+                                                                                                    <motion.div
 
-                                                                      variant="outline"
+                                                                                                      initial={{ y: 20, opacity: 0 }}
 
-                                                                      className="w-40 text-lg px-6 py-3 border-2 border-white text-white bg-white/10 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                                                                                                      animate={{ y: 0, opacity: 1 }}
 
-                                                                      asChild
+                                                                                                      transition={{ delay: 0.25, duration: 0.3 }}
 
-                                                                    >
+                                                                                                    >
 
-                                                                      <Link href={`/projects/${project.slug}`}>
+                                                                                                      <Button
 
-                                                                        {t("details")}
+                                                                                                        variant="outline"
 
-                                                                      </Link>
+                                                                                                        className="w-40 text-lg px-6 py-3 border-2 border-white text-white bg-white/10 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
 
-                                                                    </Button>
+                                                                                                        asChild
 
-                                                                  </div>
+                                                                                                      >
 
-                                                                </div>
+                                                                                                        <Link href={`/projects/${project.slug}`}>
+
+                                                                                                          {t("details")}
+
+                                                                                                        </Link>
+
+                                                                                                      </Button>
+
+                                                                                                    </motion.div>
+
+                                                                                                  </div>
+
+                                                                                                </div>
               </Card>
             </motion.div>
           ))}
