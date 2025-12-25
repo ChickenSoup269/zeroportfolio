@@ -1,4 +1,4 @@
-# My Portfolio
+# My Portfolio <img src="./src/app/image/logo.png" width="50"/>
 
 This is a personal portfolio website built with Next.js, TypeScript, and Tailwind CSS. It showcases my skills, projects, and provides a way to contact me.
 

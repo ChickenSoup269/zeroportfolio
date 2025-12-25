@@ -56,7 +56,7 @@ const allProjects = [
   },
   {
     id: "ProjectAndroid1",
-    title: "Simple Android Project",
+    title: "Netflix Android Project",
     description:
       "Một dự án Android cơ bản để giới thiệu về lập trình di động, thể hiện các tính năng cốt lõi.",
     techStack: ["Java", "Android"],
@@ -215,8 +215,8 @@ export default function OtherProjects() {
 
           <span className="text-sm font-medium text-muted-foreground">
             {t("paginationPage")}{" "}
-            <span className="text-foreground font-bold">{currentPage}</span> {t("paginationOf")}{" "}
-            {totalPages}
+            <span className="text-foreground font-bold">{currentPage}</span>{" "}
+            {t("paginationOf")} {totalPages}
           </span>
 
           <Button
