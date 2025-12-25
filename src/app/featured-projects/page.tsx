@@ -3,34 +3,10 @@
 import { useLanguage } from "@/app/LanguageContext"
 import Link from "next/link"
 import Image from "next/image"
-import { motion, Variants } from "framer-motion"
+import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { projectsData } from "@/lib/projectsData" // Sử dụng dữ liệu tập trung
-
-// --- Animation Variants ---
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-}
-
-const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      stiffness: 120,
-      damping: 12,
-    },
-  },
-}
 
 export default function FeaturedProjects() {
   const { t } = useLanguage()
@@ -59,12 +35,11 @@ export default function FeaturedProjects() {
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {projectsData.map((project) => (
-            <motion.div key={project.slug} variants={itemVariants}>
+            <motion.div key={project.slug}>
               <Card className="group relative h-80 w-full overflow-hidden rounded-xl border-2 border-transparent hover:border-primary/50 shadow-lg transition-all duration-300">
                 {/* Lớp ảnh nền */}
                 <Image
