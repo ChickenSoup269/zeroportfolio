@@ -77,6 +77,13 @@ export default function Home() {
 
   const featuredProjects = projectsData.filter((p) => p.featured)
 
+  const handleScrollToFooter = () => {
+    const footerElement = document.getElementById("footer-section")
+    if (footerElement) {
+      footerElement.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
     <div className="overflow-hidden bg-background min-h-screen">
       {/* 1. HERO SECTION */}
@@ -138,7 +145,7 @@ export default function Home() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           >
             <Button
               size="lg"
@@ -154,7 +161,7 @@ export default function Home() {
                 className="rounded-full"
                 asChild
               >
-                <Link href="https://github.com/ChickenSoup269" target="_blank">
+                <Link href="https://github.com/ChickenSoup269" target="_blank" onClick={handleScrollToFooter}>
                   <Github className="h-5 w-5" />
                 </Link>
               </Button>
@@ -164,7 +171,7 @@ export default function Home() {
                 className="rounded-full"
                 asChild
               >
-                <Link href="mailto:contact@example.com">
+                <Link href="mailto:contact@example.com" onClick={handleScrollToFooter}>
                   <Mail className="h-5 w-5" />
                 </Link>
               </Button>
@@ -174,7 +181,7 @@ export default function Home() {
                 className="rounded-full"
                 asChild
               >
-                <Link href="#">
+                <Link href="#" onClick={handleScrollToFooter}>
                   <Linkedin className="h-5 w-5" />
                 </Link>
               </Button>
