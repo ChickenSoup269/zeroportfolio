@@ -152,7 +152,7 @@ export default function Navbar() {
                       ChickenSoup
                     </p>
                     <p className="text-xs leading-none text-muted-foreground">
-                      dev@example.com
+                      tranphuocthien2692003@gmail.com
                     </p>
                   </div>
                 </DropdownMenuLabel>
