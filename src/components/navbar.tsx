@@ -1,7 +1,18 @@
 "use client"
 
 import * as React from "react"
-import { Moon, Sun, FileText, User, CaseSensitive, Menu } from "lucide-react"
+import {
+  Moon,
+  Sun,
+  FileText,
+  User,
+  CaseSensitive,
+  Menu,
+  Home,
+  Star,
+  List,
+  Settings,
+} from "lucide-react"
 import { useTheme } from "next-themes"
 import Link from "next/link"
 import { useLanguage } from "@/app/LanguageContext"
@@ -12,7 +23,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {
@@ -183,59 +198,83 @@ export default function Navbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuItem asChild>
-                  <Link href="/">{t("home")}</Link>
+                  <Link href="/" className="flex items-center gap-3">
+                    <Home className="h-4 w-4" />
+                    <span>{t("home")}</span>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/featured-projects">{t("featuredProjects")}</Link>
+                  <Link
+                    href="/featured-projects"
+                    className="flex items-center gap-3"
+                  >
+                    <Star className="h-4 w-4" />
+                    <span>{t("featuredProjects")}</span>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/other-projects">{t("otherProjects")}</Link>
+                  <Link
+                    href="/other-projects"
+                    className="flex items-center gap-3"
+                  >
+                    <List className="h-4 w-4" />
+                    <span>{t("otherProjects")}</span>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuLabel className="bg-primary text-primary-foreground rounded-md px-3 py-1 text-sm font-medium w-fit my-1 flex">Language</DropdownMenuLabel>
-                <DropdownMenuItem onClick={() => setLanguage("en")}>
-                  English
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLanguage("vi")}>
-                  Tiếng Việt
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuLabel className="bg-primary text-primary-foreground rounded-md px-3 py-1 text-sm font-medium w-fit my-1 flex">Font</DropdownMenuLabel>
-                <DropdownMenuItem onClick={() => setFont("default")}>
-                  Default
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setFont("gohu")}>
-                  Gohu
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuLabel className="bg-primary text-primary-foreground rounded-md px-3 py-1 text-sm font-medium w-fit my-1 flex">Theme</DropdownMenuLabel>
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                  {t("light")}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                  {t("dark")}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                  {t("system")}
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuLabel className="bg-primary text-primary-foreground rounded-md px-3 py-1 text-sm font-medium w-fit my-1 flex">Profile</DropdownMenuLabel>
                 <DropdownMenuItem asChild>
                   <Link
                     href="https://github.com/ChickenSoup269"
                     target="_blank"
-                    className="cursor-pointer"
+                    className="flex items-center gap-3 cursor-pointer"
                   >
-                    <User className="mr-2 h-4 w-4" />
+                    <User className="h-4 w-4" />
                     <span>{t("githubProfile")}</span>
                   </Link>
                 </DropdownMenuItem>
                 <DialogTrigger asChild>
-                  <DropdownMenuItem className="cursor-pointer">
-                    <FileText className="mr-2 h-4 w-4" />
+                  <DropdownMenuItem className="flex items-center gap-3 cursor-pointer">
+                    <FileText className="h-4 w-4" />
                     <span>{t("viewCV")}</span>
                   </DropdownMenuItem>
                 </DialogTrigger>
+                <DropdownMenuSeparator />
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger className="flex items-center gap-3">
+                    <Settings className="h-4 w-4" />
+                    <span>Settings</span>
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuLabel>Theme</DropdownMenuLabel>
+                      <DropdownMenuItem onClick={() => setTheme("light")}>
+                        {t("light")}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setTheme("dark")}>
+                        {t("dark")}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setTheme("system")}>
+                        {t("system")}
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuLabel>Language</DropdownMenuLabel>
+                      <DropdownMenuItem onClick={() => setLanguage("en")}>
+                        English
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setLanguage("vi")}>
+                        Tiếng Việt
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuLabel>Font</DropdownMenuLabel>
+                      <DropdownMenuItem onClick={() => setFont("default")}>
+                        Default
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setFont("gohu")}>
+                        Gohu
+                      </DropdownMenuItem>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
               </DropdownMenuContent>
             </DropdownMenu>
             <DialogContent className="max-w-3xl w-full h-[90vh] flex flex-col p-0 overflow-hidden">
