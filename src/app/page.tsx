@@ -24,8 +24,11 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import aboutImage from "./image/about.png"
+import PixelRain from "@/components/PixelRain"
+import PixelWar from "@/components/PixelWar"
 // Import Context
 import { useLanguage } from "@/app/LanguageContext"
+import { useAnimation } from "@/app/AnimationContext"
 import { projectsData } from "@/lib/projectsData"
 // IMPORT ICONS
 import { FaReact, FaNodeJs, FaDocker, FaGitAlt } from "react-icons/fa"
@@ -58,6 +61,7 @@ const fadeIn: Variants = {
 
 export default function Home() {
   const { t } = useLanguage() // Gọi hook useLanguage
+  const { animation, isBossActive, isGameOver, gameController } = useAnimation()
 
   // Move data inside component to use translation "t"
   const skills = [
@@ -85,109 +89,144 @@ export default function Home() {
     }
   }
 
+  const renderBackground = () => {
+    switch (animation) {
+      case "rain":
+        return <PixelRain />
+      case "war":
+        return <PixelWar />
+      case "none":
+      default:
+        return (
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+            <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
+          </div>
+        )
+    }
+  }
+
   return (
     <div className="overflow-hidden bg-background min-h-screen">
       {/* 1. HERO SECTION */}
       <section className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden">
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-          <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
-        </div>
+        {renderBackground()}
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="mb-8 inline-block"
-          >
-            <div className="p-1 rounded-full bg-gradient-to-tr from-primary to-purple-500 shadow-xl">
-              <Avatar className="h-32 w-32 border-4 border-background">
-                <AvatarImage
-                  src="https://avatars.githubusercontent.com/u/95624468?v=4"
-                  alt="ChickenSoup269"
-                />
-                <AvatarFallback>CS</AvatarFallback>
-              </Avatar>
-            </div>
-          </motion.div>
-
-          <motion.h1
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6"
-          >
-            {t("hiIm")}{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-blue-500 animate-gradient">
-              ChickenSoup
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
-          >
-            {t("role")}
-          </motion.p>
-
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-base md:text-lg text-muted-foreground/80 mb-10 max-w-xl mx-auto"
-          >
-            {t("heroDesc")}
-          </motion.p>
-
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
-          >
-            <Button
-              size="lg"
-              className="text-lg px-8 rounded-full shadow-lg"
-              asChild
+          {isGameOver ? (
+            <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <Link href="/featured-projects">{t("viewProjects")}</Link>
-            </Button>
-            <div className="flex gap-3">
+              <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight mb-6 text-destructive">
+                GAME OVER
+              </h1>
               <Button
-                size="icon"
-                variant="outline"
-                className="rounded-full"
-                asChild
+                size="lg"
+                className="text-lg px-8 rounded-full shadow-lg"
+                onClick={() => gameController?.startGame()}
               >
-                <Link href="#" onClick={handleScrollToFooter}>
-                  <Github className="h-5 w-5" />
-                </Link>
+                Play Again
               </Button>
-              <Button
-                size="icon"
-                variant="outline"
-                className="rounded-full"
-                asChild
+            </motion.div>
+          ) : !isBossActive && (
+            <>
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                className="mb-8 inline-block"
               >
-                <Link href="#" onClick={handleScrollToFooter}>
-                  <Mail className="h-5 w-5" />
-                </Link>
-              </Button>
-              <Button
-                size="icon"
-                variant="outline"
-                className="rounded-full"
-                asChild
+                <div className="p-1 rounded-full bg-gradient-to-tr from-primary to-blue-800 shadow-xl">
+                  <Avatar className="h-32 w-32 border-4 border-background">
+                    <AvatarImage
+                      src="https://avatars.githubusercontent.com/u/95624468?v=4"
+                      alt="ChickenSoup269"
+                    />
+                    <AvatarFallback>CS</AvatarFallback>
+                  </Avatar>
+                </div>
+              </motion.div>
+
+              <motion.h1
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6"
               >
-                <Link href="#" onClick={handleScrollToFooter}>
-                  <Linkedin className="h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
-          </motion.div>
+                {t("hiIm")}{" "}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-orange-400 animate-gradient">
+                  ChickenSoup
+                </span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+              >
+                {t("role")}
+              </motion.p>
+
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="text-base md:text-lg text-muted-foreground/80 mb-10 max-w-xl mx-auto"
+              >
+                {t("heroDesc")}
+              </motion.p>
+
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+              >
+                <Button
+                  size="lg"
+                  className="text-lg px-8 rounded-full shadow-lg"
+                  asChild
+                >
+                  <Link href="/featured-projects">{t("viewProjects")}</Link>
+                </Button>
+                <div className="flex gap-3">
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    className="rounded-full"
+                    asChild
+                  >
+                    <Link href="#" onClick={handleScrollToFooter}>
+                      <Github className="h-5 w-5" />
+                    </Link>
+                  </Button>
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    className="rounded-full"
+                    asChild
+                  >
+                    <Link href="#" onClick={handleScrollToFooter}>
+                      <Mail className="h-5 w-5" />
+                    </Link>
+                  </Button>
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    className="rounded-full"
+                    asChild
+                  >
+                    <Link href="#" onClick={handleScrollToFooter}>
+                      <Linkedin className="h-5 w-5" />
+                    </Link>
+                  </Button>
+                </div>
+              </motion.div>
+            </>
+          )}
         </div>
       </section>
 

@@ -3,6 +3,7 @@
 import { ThemeProvider } from "next-themes"
 import { LanguageProvider } from "./LanguageContext"
 import { FontProvider } from "./FontContext"
+import { AnimationProvider } from "./AnimationContext"
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -12,9 +13,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      <FontProvider>
-        <LanguageProvider>{children}</LanguageProvider>
-      </FontProvider>
+      <AnimationProvider>
+        <FontProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </FontProvider>
+      </AnimationProvider>
     </ThemeProvider>
   )
 }

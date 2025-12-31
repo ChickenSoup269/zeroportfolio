@@ -12,11 +12,13 @@ import {
   Star,
   List,
   Settings,
+  Sparkles,
 } from "lucide-react"
 import { useTheme } from "next-themes"
 import Link from "next/link"
 import { useLanguage } from "@/app/LanguageContext"
 import { useFont } from "@/app/FontContext"
+import { useAnimation } from "@/app/AnimationContext"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -53,13 +55,14 @@ export default function Navbar() {
   const { setTheme } = useTheme()
   const { language, setLanguage, t } = useLanguage()
   const { setFont } = useFont()
+  const { setAnimation } = useAnimation()
 
   return (
     <header className="sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b shadow-sm z-50">
       <nav className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         <Link
           href="/"
-          className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600 animate-gradient"
+          className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-orange-400 animate-gradient"
         >
           Zero Portfolio
         </Link>
@@ -94,7 +97,11 @@ export default function Navbar() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-9 w-9 shadow-md">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-9 w-9 shadow-md cursor-pointer"
+              >
                 <CaseSensitive className="h-[1.2rem] w-[1.2rem]" />
               </Button>
             </DropdownMenuTrigger>
@@ -110,7 +117,11 @@ export default function Navbar() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-9 w-9 shadow-md">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-9 w-9 shadow-md cursor-pointer"
+              >
                 <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                 <span className="sr-only">Toggle theme</span>
@@ -129,6 +140,40 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-9 w-9 shadow-md cursor-pointer"
+              >
+                <Settings className="h-[1.2rem] w-[1.2rem]" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Settings</DropdownMenuLabel>
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  <Sparkles className="mr-2 h-4 w-4" />
+                  <span>Animation</span>
+                </DropdownMenuSubTrigger>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuItem onClick={() => setAnimation("none")}>
+                      None
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setAnimation("rain")}>
+                      Pixel Rain
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setAnimation("war")}>
+                      Pixel War
+                    </DropdownMenuItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <Dialog>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -136,7 +181,7 @@ export default function Navbar() {
                   variant="ghost"
                   className="relative h-9 w-9 rounded-full shadow-md"
                 >
-                  <Avatar className="h-9 w-9 border transition-opacity hover:opacity-80">
+                  <Avatar className="h-9 w-9 border transition-opacity hover:opacity-80 shadow-sm cursor-pointer">
                     <AvatarImage
                       src="https://avatars.githubusercontent.com/u/95624468?v=4"
                       alt="ChickenSoup"
@@ -271,6 +316,17 @@ export default function Navbar() {
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => setFont("gohu")}>
                         Gohu
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuLabel>Animation</DropdownMenuLabel>
+                      <DropdownMenuItem onClick={() => setAnimation("none")}>
+                        None
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setAnimation("rain")}>
+                        Pixel Rain
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setAnimation("war")}>
+                        Pixel War
                       </DropdownMenuItem>
                     </DropdownMenuSubContent>
                   </DropdownMenuPortal>
