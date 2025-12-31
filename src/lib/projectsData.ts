@@ -57,7 +57,6 @@ export const projectsData: Project[] = [
       "MongoDB",
       "Redux Toolkit",
       "Ant Design",
-      "Socket.io",
       "Tailwind CSS",
     ],
     content: "projZeroMovieContent",

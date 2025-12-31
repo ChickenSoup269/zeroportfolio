@@ -83,7 +83,7 @@ export default function FeaturedProjects() {
                       >
                         <Button
                           variant="outline"
-                          className="w-40 text-lg px-6 py-3 border-2 border-white text-white bg-white/10 hover:bg-white hover:text-black hover:border-white transition-all duration-300 pointer-events-none"
+                          className="w-full sm:w-40 text-base sm:text-lg px-6 py-3 border-2 border-white text-white bg-white/10 hover:bg-white hover:text-black hover:border-white transition-all duration-300 pointer-events-none"
                         >
                           {t("details")}
                         </Button>

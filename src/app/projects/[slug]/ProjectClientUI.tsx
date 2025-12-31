@@ -132,10 +132,10 @@ export default function ProjectClientUI({ project }: { project: any }) {
             className="md:col-span-2 flex flex-col justify-center space-y-6"
           >
             <div>
-              <h1 className="text-3xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
                 {t(project.title)}
               </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                 {t(project.description)}
               </p>
             </div>
@@ -157,16 +157,23 @@ export default function ProjectClientUI({ project }: { project: any }) {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
               {project.liveUrl && (
-                <Button className="flex-1 shadow-lg shadow-primary/20" asChild>
+                <Button
+                  className="w-full sm:flex-1 sm:w-auto shadow-lg shadow-primary/20"
+                  asChild
+                >
                   <Link href={project.liveUrl} target="_blank">
                     <Globe className="mr-2 h-4 w-4" /> {t("liveDemo")}
                   </Link>
                 </Button>
               )}
               {project.githubUrl && (
-                <Button variant="outline" className="flex-1" asChild>
+                <Button
+                  variant="outline"
+                  className="w-full sm:flex-1 sm:w-auto"
+                  asChild
+                >
                   <Link href={project.githubUrl} target="_blank">
                     <Github className="mr-2 h-4 w-4" /> {t("sourceCode")}
                   </Link>
@@ -192,7 +199,7 @@ export default function ProjectClientUI({ project }: { project: any }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 flex items-center gap-2">
                 {t("overview")}
               </h2>
               <div className="prose dark:prose-invert max-w-none text-muted-foreground text-lg leading-8 text-justify">
@@ -207,7 +214,7 @@ export default function ProjectClientUI({ project }: { project: any }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 flex items-center gap-2">
                   <Youtube className="h-6 w-6 text-red-600" /> {t("videoDemo")}
                 </h2>
                 <div className="rounded-2xl overflow-hidden border shadow-lg aspect-video bg-black">
@@ -230,7 +237,7 @@ export default function ProjectClientUI({ project }: { project: any }) {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 flex items-center gap-2">
                   <ImageIcon className="h-6 w-6 text-blue-500" /> {t("gallery")}
                 </h2>
 
@@ -258,12 +265,12 @@ export default function ProjectClientUI({ project }: { project: any }) {
                         whileHover={{ scale: 1.05, y: -5 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setSelectedImage(img)}
-                        className="relative min-w-[200px] h-[140px] rounded-xl overflow-hidden border shadow-sm cursor-pointer snap-start bg-muted shrink-0"
+                        className="relative min-w-30 h-28 sm:min-w-[200px] sm:h-[140px] rounded-xl overflow-hidden border shadow-sm cursor-pointer snap-start bg-muted shrink-0"
                       >
                         <Image
                           src={img}
                           alt={`Gallery ${idx}`}
-                          width={300}
+                          width={200}
                           height={200}
                           className="w-full h-full object-cover"
                         />
@@ -301,7 +308,7 @@ export default function ProjectClientUI({ project }: { project: any }) {
             className="space-y-8"
           >
             {/* Features Card */}
-            <div className="p-6 rounded-2xl border bg-card/50 backdrop-blur-sm shadow-sm sticky top-24">
+            <div className="p-6 rounded-2xl border bg-card/50 backdrop-blur-sm shadow-sm md:sticky top-24">
               <h3 className="font-bold text-xl mb-6 flex items-center gap-2 border-b pb-4">
                 {t("keyFeatures")}
               </h3>
