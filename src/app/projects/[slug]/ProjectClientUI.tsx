@@ -265,7 +265,7 @@ export default function ProjectClientUI({ project }: { project: any }) {
                         whileHover={{ scale: 1.05, y: -5 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setSelectedImage(img)}
-                        className="relative min-w-20 h-28 sm:min-w-[200px] sm:h-[140px] rounded-xl overflow-hidden border shadow-sm cursor-pointer snap-start bg-muted shrink-0"
+                        className="relative min-w-20 h-28 sm:min-w-[180px] sm:h-[120px] rounded-xl overflow-hidden border shadow-sm cursor-pointer snap-start bg-muted shrink-0"
                       >
                         <Image
                           src={img}

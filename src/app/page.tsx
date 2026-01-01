@@ -21,6 +21,7 @@ import {
   Github,
   Linkedin,
   Mail,
+  Gitlab,
 } from "lucide-react"
 import Image from "next/image"
 import aboutImage from "./image/about.png"
@@ -65,19 +66,20 @@ export default function Home() {
 
   // Move data inside component to use translation "t"
   const skills = [
-    { name: "Next.js", icon: SiNextdotjs, color: "text-black dark:text-white" },
     { name: "React", icon: FaReact, color: "text-blue-500" },
+    { name: "Next.js", icon: SiNextdotjs, color: "text-black dark:text-white" },
     { name: "TypeScript", icon: SiTypescript, color: "text-blue-600" },
     { name: "Node.js", icon: FaNodeJs, color: "text-green-600" },
-    { name: "JavaScript", icon: SiJavascript, color: "text-yellow-400" },
     { name: "HTML", icon: SiHtml5, color: "text-orange-600" },
     { name: "CSS", icon: SiCss3, color: "text-blue-600" },
+    { name: "JavaScript", icon: SiJavascript, color: "text-yellow-400" },
     { name: "Tailwind", icon: SiTailwindcss, color: "text-cyan-500" },
     { name: "PostgreSQL", icon: SiPostgresql, color: "text-blue-400" },
     { name: "MongoDB", icon: SiMongodb, color: "text-green-500" },
     { name: "Docker", icon: FaDocker, color: "text-blue-500" },
     { name: "Git", icon: FaGitAlt, color: "text-orange-600" },
     { name: "GitHub", icon: Github, color: "text-gray-800 dark:text-white" },
+    { name: "GitLab", icon: Gitlab, color: "text-orange-600" },
   ]
 
   const featuredProjects = projectsData.filter((p) => p.featured)
@@ -115,9 +117,9 @@ export default function Home() {
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           {isGameOver ? (
             <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
             >
               <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight mb-6 text-destructive">
                 GAME OVER
@@ -130,102 +132,104 @@ export default function Home() {
                 Play Again
               </Button>
             </motion.div>
-          ) : !isBossActive && (
-            <>
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                className="mb-8 inline-block"
-              >
-                <div className="p-1 rounded-full bg-gradient-to-tr from-primary to-blue-800 shadow-xl">
-                  <Avatar className="h-32 w-32 border-4 border-background">
-                    <AvatarImage
-                      src="https://avatars.githubusercontent.com/u/95624468?v=4"
-                      alt="ChickenSoup269"
-                    />
-                    <AvatarFallback>CS</AvatarFallback>
-                  </Avatar>
-                </div>
-              </motion.div>
-
-              <motion.h1
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-                className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6"
-              >
-                {t("hiIm")}{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-orange-400 animate-gradient">
-                  ChickenSoup
-                </span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
-              >
-                {t("role")}
-              </motion.p>
-
-              <motion.p
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="text-base md:text-lg text-muted-foreground/80 mb-10 max-w-xl mx-auto"
-              >
-                {t("heroDesc")}
-              </motion.p>
-
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
-              >
-                <Button
-                  size="lg"
-                  className="text-lg px-8 rounded-full shadow-lg"
-                  asChild
+          ) : (
+            !isBossActive && (
+              <>
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  className="mb-8 inline-block"
                 >
-                  <Link href="/featured-projects">{t("viewProjects")}</Link>
-                </Button>
-                <div className="flex gap-3">
+                  <div className="p-1 rounded-full bg-gradient-to-tr from-primary to-blue-800 shadow-xl">
+                    <Avatar className="h-32 w-32 border-4 border-background">
+                      <AvatarImage
+                        src="https://avatars.githubusercontent.com/u/95624468?v=4"
+                        alt="ChickenSoup269"
+                      />
+                      <AvatarFallback>CS</AvatarFallback>
+                    </Avatar>
+                  </div>
+                </motion.div>
+
+                <motion.h1
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                  className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6"
+                >
+                  {t("hiIm")}{" "}
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-orange-400 animate-gradient">
+                    ChickenSoup
+                  </span>
+                </motion.h1>
+
+                <motion.p
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                  className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+                >
+                  {t("role")}
+                </motion.p>
+
+                <motion.p
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  className="text-base md:text-lg text-muted-foreground/80 mb-10 max-w-xl mx-auto"
+                >
+                  {t("heroDesc")}
+                </motion.p>
+
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+                >
                   <Button
-                    size="icon"
-                    variant="outline"
-                    className="rounded-full"
+                    size="lg"
+                    className="text-lg px-8 rounded-full shadow-lg"
                     asChild
                   >
-                    <Link href="#" onClick={handleScrollToFooter}>
-                      <Github className="h-5 w-5" />
-                    </Link>
+                    <Link href="/featured-projects">{t("viewProjects")}</Link>
                   </Button>
-                  <Button
-                    size="icon"
-                    variant="outline"
-                    className="rounded-full"
-                    asChild
-                  >
-                    <Link href="#" onClick={handleScrollToFooter}>
-                      <Mail className="h-5 w-5" />
-                    </Link>
-                  </Button>
-                  <Button
-                    size="icon"
-                    variant="outline"
-                    className="rounded-full"
-                    asChild
-                  >
-                    <Link href="#" onClick={handleScrollToFooter}>
-                      <Linkedin className="h-5 w-5" />
-                    </Link>
-                  </Button>
-                </div>
-              </motion.div>
-            </>
+                  <div className="flex gap-3">
+                    <Button
+                      size="icon"
+                      variant="outline"
+                      className="rounded-full"
+                      asChild
+                    >
+                      <Link href="#" onClick={handleScrollToFooter}>
+                        <Github className="h-5 w-5" />
+                      </Link>
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="outline"
+                      className="rounded-full"
+                      asChild
+                    >
+                      <Link href="#" onClick={handleScrollToFooter}>
+                        <Mail className="h-5 w-5" />
+                      </Link>
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="outline"
+                      className="rounded-full"
+                      asChild
+                    >
+                      <Link href="#" onClick={handleScrollToFooter}>
+                        <Linkedin className="h-5 w-5" />
+                      </Link>
+                    </Button>
+                  </div>
+                </motion.div>
+              </>
+            )
           )}
         </div>
       </section>
